@@ -703,6 +703,9 @@ def _enrich_json_with_text(j_dic, txt_file_path, raw_text=None):
     elif tokeniser == 'ptblike':
         from tokenise import gtb_token_boundary_gen
         tok_offset_gen = gtb_token_boundary_gen
+    elif tokeniser == 'jieba':
+        from tokenise import cn_token_boundary_gen
+        tok_offset_gen = cn_token_boundary_gen
     else:
         Messager.warning('Unrecognized tokenisation option '
                          ', reverting to whitespace tokenisation.')

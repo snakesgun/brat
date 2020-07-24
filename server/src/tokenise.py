@@ -2,13 +2,11 @@
 # -*- coding: utf-8 -*-
 
 
-
 """Tokenisation related functionality.
 
 Author:     Pontus Stenetorp <pontus stenetorp se>
 Version:    2011-05-23
 """
-
 
 
 def _token_boundaries_by_alignment(tokens, original_text):
@@ -29,6 +27,20 @@ def jp_token_boundary_gen(text):
     except ImportError:
         from message import Messager
         Messager.error('Failed to import MeCab, '
+                       'falling back on whitespace tokenization. '
+                       'Please check configuration and/or server setup.')
+        for o in whitespace_token_boundary_gen(text):
+            yield o
+
+
+def cn_token_boundary_gen(text):
+    try:
+        from chinese_token import token_offsets_gen
+        for o in token_offsets_gen(text):
+            yield o
+    except ImportError:
+        from message import Messager
+        Messager.error('Failed to import jieba, '
                        'falling back on whitespace tokenization. '
                        'Please check configuration and/or server setup.')
         for o in whitespace_token_boundary_gen(text):

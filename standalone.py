@@ -15,6 +15,9 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 from posixpath import normpath
 from socketserver import ForkingMixIn
 from urllib.parse import unquote
+import jieba
+
+jieba.initialize()
 
 
 # brat imports
